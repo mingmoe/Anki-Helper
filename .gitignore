@@ -1,0 +1,5 @@
+temp/
+__pycache__/shared.cpython-311.pyc
+output.json
+total.json
+scheduler.js

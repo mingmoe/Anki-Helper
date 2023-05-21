@@ -1,0 +1,3 @@
+[submodule "fsrs4anki"]
+	path = fsrs4anki
+	url = https://github.com/mingmoe/fsrs4anki

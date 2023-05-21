@@ -20,6 +20,8 @@ config_json_file = os.path.join(root_dir,"config.json")
 
 from loguru import logger as priv_logger
 
-priv_logger.add(sys.stdout, colorize=True, format="<green>{time}</green> {level}  <level>{message}</level>")
+# remove default logger
+priv_logger.remove()
+priv_logger.add(sys.stdout, colorize=True, format="[<green>{time}</green>][{level}]:<level>{message}</level>")
 
 logger = priv_logger

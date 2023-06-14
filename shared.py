@@ -7,7 +7,9 @@ configEnd = "// Configuration End\n"
 
 globalDeck = "global config for FSRS4Anki"
 
-root_dir = os.path.abspath(os.getcwd())
+
+# root_dir = os.path.dirname(os.path.realpath(__file__))
+root_dir = os.path.dirname(os.path.abspath(__file__))
 temp_folder = os.path.join(root_dir,"temp")
 
 fsrs4_folder = os.path.join(root_dir,"fsrs4anki")
@@ -25,3 +27,5 @@ priv_logger.remove()
 priv_logger.add(sys.stdout, colorize=True, format="[<green>{time}</green>][{level}]:<level>{message}</level>")
 
 logger = priv_logger
+
+logger.info(f"anki-helper work on {root_dir}")

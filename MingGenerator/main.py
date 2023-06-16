@@ -1,5 +1,5 @@
 # 这是一个示例 Python 脚本。
-
+from PIL.Image import Resampling
 from anki import collection, decks, cards, utils
 import zipfile
 from docx import Document
@@ -43,8 +43,8 @@ for file in onlyfiles:
     file = f"{file}.png"
 
     image = Image.open(file)
-    image.thumbnail((512, 512))
-    image.save(file, 'png', quality=88)
+    image.thumbnail((512, 512), Resampling.HAMMING)
+    image.save(file, 'png')
 
     document.add_picture(file)
 
@@ -66,18 +66,21 @@ document.sections[0].bottom_margin = (Inches(0.25))
 
 # 添加页眉
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.shared import Pt
 
 header = document.sections[0].header
 paragraph = header.paragraphs[0]
-paragraph.text = "大明酱的Brainstorm.  Powered by MingMoe"
-paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
-# 设置字体
+# 设置文字
 run = paragraph.add_run()
 font = run.font
 font.italic = True
+font.size = Pt(12)
+paragraph.text = "大明酱的Brainstorm.  Powered by MingMoe"
+paragraph.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
 try:
-    os.remove('output.docx')
+    if os.path.exists("output.docx"):
+        os.remove('output.docx')
 finally:
     document.save('output.docx')

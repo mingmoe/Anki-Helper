@@ -9,6 +9,7 @@ import shared
 
 # prepare
 nb = nbformat.read(open(shared.fsrs4anki_notebook_file,encoding="utf-8"), as_version=4)
+shared.logger.info(f"load optimizer from {shared.fsrs4anki_notebook_file}")
 config = {}
 
 with open(shared.config_json_file,encoding="utf-8") as f:
@@ -32,7 +33,11 @@ for f in files:
     pm.execute_notebook(
     nb,
     None,
-    parameters=dict(ming_data_file=f,ming_next_day_start=config['next_day_starts_at'],ming_output_file=shared.output_json_file)
+    parameters=dict(ming_data_file=f,
+                    ming_next_day_start=config['next_day_starts_at'],
+                    ming_output_file=shared.output_json_file,
+                    # Always set this to true. It depend on my person.
+                    ming_filter_out_suspended_cards=True)
     )
 
     #exit

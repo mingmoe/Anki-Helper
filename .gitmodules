@@ -1,3 +1,6 @@
 [submodule "fsrs4anki"]
 	path = fsrs4anki
 	url = https://github.com/mingmoe/fsrs4anki
+[submodule "fsrs-optimizer"]
+	path = fsrs-optimizer
+	url = https://github.com/open-spaced-repetition/fsrs-optimizer

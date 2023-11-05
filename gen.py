@@ -3,6 +3,7 @@ import json
 import os
 import sys
 import shared
+import difflib
 
 # prepare
 text = ""
@@ -71,5 +72,15 @@ const display_memory_state = false;
 # as a result
 result = replaceConfig(config)
 shared.logger.info("gen scheduler done")
-with open("scheduler.js",mode="w",encoding="utf-8") as f:
+with open("scheduler.js",mode="r+",encoding="utf-8") as f:
+    got = f.read()
+
+    f.truncate(0)
+    f.seek(0)
     f.write(result)
+
+    diffs = difflib.ndiff(got.splitlines(keepends=True),result.splitlines(keepends=True))
+
+    for diff in diffs:
+        if not diff.startswith(" "):
+            print(diff)
